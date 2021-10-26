@@ -7,13 +7,13 @@ const isDisconnected = process.env.JSS_MODE === JSS_MODE_DISCONNECTED;
 
 // A public URL (and uses below) is required for Sitecore Experience Editor support.
 // This is set to http://localhost:3000 by default. See .env for more details.
-const publicUrl = process.env.PUBLIC_URL;
-
+// const publicUrl = process.env.PUBLIC_URL;
+const publicUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : process.env.PUBLIC_URL;
 const nextConfig = {
 
   // Set assetPrefix to our public URL
   assetPrefix: publicUrl,
-  
+
   // Allow specifying a distinct distDir when concurrently running app in a container
   distDir: process.env.NEXTJS_DIST_DIR || '.next',
 
@@ -85,7 +85,7 @@ const nextConfig = {
       ];
     }
   },
-  
+
   webpack: (config, options) => {
     applyGraphQLCodeGenerationLoaders(config, options);
 
